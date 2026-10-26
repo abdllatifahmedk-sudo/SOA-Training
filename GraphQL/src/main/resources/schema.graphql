@@ -5,10 +5,12 @@ type UniteEnseignement {
     credits: Int
     semestre: Int
 }
+
 type QueryResolver {
     allUEs: [UniteEnseignement]
+    getUeByCode(code: Int): UniteEnseignement
+    getUeBySemestre(semestre: Int): [UniteEnseignement]
 }
-
 
 type MutationResolver {
     addUniteEnseignement(
@@ -19,7 +21,17 @@ type MutationResolver {
         semestre: Int!
     ): Boolean
 
+    updateUniteEnseignement(
+        code: Int!
+        domaine: String!
+        responsable: String!
+        credits: Int!
+        semestre: Int!
+    ): Boolean
+
+    deleteUniteEnseignement(code: Int!): Boolean
 }
+
 schema {
     query: QueryResolver
     mutation: MutationResolver
